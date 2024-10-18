@@ -1,0 +1,804 @@
+Practical No. 6
+Aim: Create a web application to demonstrate various states of ASP.NET Pages.
+a) View State:
+ViewState is an important client side state management technique. ViewState is used to store user data on page at the
+time of post back of web page. ViewState does not hold the controls, it holds the values of controls. It does not restore
+the value to control after page post back. ViewState can hold the value on single web page, if we go to other page
+using response.redirect then ViewState will be null.
+Code:
+Default.aspx Page:
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs"
+Inherits="_Default" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server"> <title></title> </head>
+<body>
+ <form id="form1" runat="server">
+ <div align="center">
+ <table style="border: medium solid #000000; height: 270px;" border="0"
+frame="border">
+ <tr>
+ <td align="center" bgcolor="#009933" colspan="2">
+ <asp:Label ID="Label1" runat="server" Font-Bold="True" FontNames="Century Schoolbook" Font-Size="XX-Large"
+ForeColor="White" Text="View State Example"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td align="right" width="50%">
+ <asp:Label ID="Label2" runat="server" Text="Enter Value:" FontBold="True" Font-Italic="False" Font-Names="Century Schoolbook"
+Font-Size="X-Large"></asp:Label>
+ </td>
+ <td align="left">
+ <asp:TextBox ID="TextBox1" runat="server" Font-Size="X-Large">
+</asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+ <td width="50%" align="center">
+ <asp:Button ID="Button1" runat="server" Text="Clear Value" FontBold="True" Font-Names="Times New Roman" Font-Size="X-Large"
+onclick="Button1_Click" />
+ </td>
+ <td align="center">
+ <asp:Button ID="Button2" runat="server" Text="Display Value"
+Font-Bold="True" Font-Names="Times New Roman" Font-Size="XLarge" onclick="Button2_Click" />
+ </td>
+ </tr>
+ <tr>
+ <td colspan="2" align="center">
+ <asp:Label ID="Label3" runat="server" Font-Size="X-Large"
+ Font-Strikeout="False"></asp:Label>
+ </td>
+ </tr>
+ </table>
+ </div>
+ </form>
+</body>
+</html>
+Default.aspx.cs Page:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+public partial class _Default : System.Web.UI.Page
+{
+ protected void Page_Load(object sender, EventArgs e)
+ { }
+ protected void Button1_Click(object sender, EventArgs e)
+ {
+ ViewState["name"] = TextBox1.Text;
+ TextBox1.Text = "";
+ }
+ protected void Button2_Click(object sender, EventArgs e)
+ {
+ Label3.Text = ViewState["name"].ToString();
+ }
+
+b) Query String
+Query string is a simple way to pass some information from one page to another. The information cab be easily pass
+to one page to another or to same page. With query string method the information passed in url of page request.
+This method many browsers supports only 255 character length of url in query string. The value passed will be visible
+so some time it cause security issue.
+For send information to other page Response.Redirect() method used and for retrieve information from url use
+Request.QueryString() method used.
+In Query String method we can sent value to only desired page, and value will be temporarily. So Query string
+increase the overall performance of web application.
+Code:
+Default.aspx Page:
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs"
+Inherits="_Default" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server"> <title></title> </head>
+<body>
+ <form id="form1" runat="server">
+ <div align="center">
+ <table style="border: medium solid #000000; height: 270px; width: 500px;"
+ border="0" frame="border">
+ <tr>
+ <td align="center" bgcolor="#009933" colspan="2">
+ <asp:Label ID="Label1" runat="server" Font-Bold="True"
+ Font-Names="Century Schoolbook" Font-Size="XX-Large"
+ForeColor="White" Text="Query String Example"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td align="right" width="50%">
+ <asp:Label ID="Label2" runat="server" Text="Enter Value:" FontBold="True" Font-Italic="False" Font-Names="Century
+Schoolbook" Font-Size="X-Large"></asp:Label>
+ </td>
+ <td align="left">
+ <asp:TextBox ID="TextBox1" runat="server" Font-Size="XLarge"></asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+ <td width="50%" align="center">&nbsp;</td>
+ <td align="left">
+ <asp:Button ID="Button2" runat="server" Text="Send Value" FontBold="True" Font-Names="Times New Roman" Font-Size="X-Large"
+onclick="Button2_Click" />
+ </td>
+ </tr>
+ </table>
+ </div>
+ </form>
+</body>
+</html>
+Default.aspx.cs Page:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+public partial class _Default : System.Web.UI.Page
+{
+ protected void Page_Load(object sender, EventArgs e)
+ { }
+ protected void Button2_Click(object sender, EventArgs e)
+ {
+ Response.Redirect("http://localhost:53353/WebSite5/Default2.aspx?name=" +
+TextBox1.Text);
+ }
+}
+Default2.aspx Page:
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default2.aspx.cs"
+Inherits="Default2" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server"> <title></title> </head>
+<body>
+ <form id="form1" runat="server">
+ <div align="center">
+ <br /> <br />
+ <asp:Label ID="Label1" runat="server" Font-Size="XX-Large"></asp:Label>
+ <br /> <br />
+ </div>
+ </form>
+</body>
+</html>
+Default2.aspx.cs Page:
+using System;
+using System.Collections.Generic;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+public partial class Default2 : System.Web.UI.Page
+{
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ Label1.Text = "Welcome " + Request.QueryString["name"].ToString();
+ }
+}
+
+c) Cookies:
+Cookies is a small pieces of text information which is stored on user hard drive using user’s browser for identify
+users. It may contain username, ID, password or any information. Cookie does not use server memory.
+Cookies stored user computer at C:\Document and Setting\Current login_User\Cookie”.
+Types of Cookies
+1. Persistence Cookie
+2. Non-Persistence Cookie
+1. Persistence Cookie
+This types of cookies are permanently stored on user hard drive.
+Cookies which have an expiry date time are called persistence cooks. This types of cookies stored user hard drive
+permanently till the date time we set.
+2. Non-Persistence Cookie
+This types of cookies are not permanently stored on user hard drive. It stores the information up the user accessing
+the same browser. When user close the browser the cookies will be automatically deleted.
+Default.aspx Page:
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs"
+Inherits="_Default" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server"> <title></title>
+ <style type="text/css">
+ .style1 { width: 50%; }
+ .style2 { width: 25%; }
+ </style>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div align="center">
+ <table style="border: medium solid #000000; height: 270px; width: 600px;"
+ border="0" frame="border">
+ <tr>
+ <td align="center" bgcolor="#009933" colspan="2">
+ <asp:Label ID="Label1" runat="server" Font-Bold="True"
+ Font-Names="Century Schoolbook" Font-Size="XX-Large"
+ForeColor="White"
+ Text="Cookie Example"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td align="center" width="50%" class="style1" colspan="2">
+ <asp:Label ID="Label2" runat="server" Text="Enter Value:" FontBold="True" Font-Italic="False" Font-Names="Century
+Schoolbook" Font-Size="X-Large"></asp:Label>
+ <asp:TextBox ID="TextBox1" runat="server" Font-Size="X-Large">
+</asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+ <td align="center" class="style2">
+ <asp:Button ID="Button1" runat="server" Text="Create Cookie"
+Font-Bold="True" Font-Names="Times New Roman" Font-Size="XLarge" onclick="Button1_Click" Height="44px" Width="200px" />
+ </td>
+ <td align="center">
+ <asp:Button ID="Button2" runat="server" Text="Retrieve Cookie"
+Font-Bold="True" Font-Names="Times New Roman" Font-Size="XLarge" onclick="Button2_Click" Height="44px" Width="200px" />
+ </td>
+ </tr>
+ <tr>
+ <td colspan=2>
+ <asp:Label ID="Label3" runat="server" Font-Size="XX-Large">
+</asp:Label>
+ </td>
+ </tr>
+ </table>
+ </div>
+ </form>
+</body>
+</html>
+Default.aspx.cs Page:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+public partial class _Default : System.Web.UI.Page
+{
+ protect void Page_Load(object sender, EventArgs e)
+ { }
+ protected void Button1_Click(object sender, EventArgs e)
+ {
+ Response.Cookies["name"].Value = TextBox1.Text;
+ Response.Cookies["name"].Expires = DateTime.Now.AddMinutes(1);
+ Label3.Text = Label3.Text + "Cookie Created";
+ TextBox1.Text = "";
+ }
+ protected void Button2_Click(object sender, EventArgs e)
+ {
+ if (Request.Cookies["name"] == null || Request.Cookies["password"] == null)
+ {
+ Label3.Text = "No cookie found";
+ }
+ else
+ {
+ TextBox1.Text = Request.Cookies["name"].Value;
+ } } }
+
+
+d) Session State
+State management is an important part of any application. The Session is the important features of asp.net.
+Session state is a period of time to visit a website for a particular user. Session can store the client data on a server.
+Session is a best state management features to store the client data on server separately for each user.
+Sign out automatically from website after some time
+ After login you stay idle on some period of time on any website, then after you do any activity on site and
+you automatically have been sign out from website and they ask to us login again.
+ In above case we need to use session timeout property. At the time login to site, the identification of user may
+be username or userid stored in session. We assign timeout value in minute to session timeout property. The
+timeout value is a length of time to live a session if we do nothing on site more than timeout value, then the
+session automatically time outed and session would be null. On each page while page loading time we need
+to check session value if there is some value found so go smoothly, but if session time out then redirect user
+to login page.
+Default.aspx Page:
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs"
+Inherits="_Default" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server"> <title></title> </head>
+<body>
+ <form id="form1" runat="server">
+ <div align="center">
+ <table style="border: medium solid #000000; height: 270px; width: 600px;"
+ border="0" frame="border">
+ <tr>
+ <td align="center" bgcolor="#009933" colspan="2">
+ <asp:Label ID="Label1" runat="server" Font-Bold="True"
+Font-Names="Century Schoolbook" Font-Size="XX-Large"
+ForeColor="White" Text="Session State Example"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td align="center" width="50%" colspan="2">
+ <asp:Label ID="Label2" runat="server" Text="Enter Name:" FontBold="True" Font-Italic="False" Font-Names="Century
+Schoolbook" Font-Size="X-Large"></asp:Label>
+ &nbsp;&nbsp;
+<asp:TextBox ID="TextBox1" runat="server" Font-Size="XLarge"></asp:TextBox>
+ &nbsp;
+<br />
+ <br />
+ <asp:Label ID="Label4" runat="server" Text="Enter City:" FontBold="True" Font-Italic="False" Font-Names="Century
+Schoolbook" Font-Size="X-Large"></asp:Label>
+&nbsp;&nbsp;
+<asp:TextBox ID="TextBox2" runat="server" Font-Size="XLarge"></asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+ <td align="center" >
+ <asp:Button ID="Button1" runat="server" Text="Set Session Value"
+Font-Bold="True" Font-Names="Times New Roman" Font-Size="XLarge" onclick="Button1_Click" Height="44px" Width="200px" />
+ </td>
+ </tr>
+ </table>
+ </div>
+ </form>
+</body>
+</html>
+Default2.aspx Page:
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default2.aspx.cs"
+Inherits="Default2" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server"> <title></title> </head>
+<body>
+ <form id="form1" runat="server">
+ <div align="center">
+ <table style="border: medium solid #000000; height: 270px; width: 600px;"
+ border="0" frame="border">
+ <tr>
+ <td align="center" bgcolor="#009933" colspan="2">
+ <asp:Label ID="Label1" runat="server" Font-Bold="True"
+Font-Names="Century Schoolbook" Font-Size="XX-Large"
+ForeColor="White" Text="Retrieve Session State"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td align="center" width="50%" colspan="2">
+<asp:Label ID="Label2" runat="server" Text="Enter Name:" FontBold="True" Font-Italic="False" Font-Names="Century Schoolbook"
+Font-Size="X-Large"></asp:Label>
+ &nbsp;&nbsp;&nbsp;
+<asp:Label ID="Label5" runat="server" Font-Italic="True"
+ Font-Size="X-Large" Text="Label"></asp:Label>
+ <br />
+ <br />
+<asp:Label ID="Label4" runat="server" Text="Enter City:" FontBold="True" Font-Italic="False" Font-Names="Century Schoolbook"
+Font-Size="X-Large"></asp:Label>
+ &nbsp;&nbsp;&nbsp;
+<asp:Label ID="Label6" runat="server" Font-Italic="True" FontSize="X-Large" Text="Label"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td align="center" >
+ <asp:Button ID="Button1" runat="server" Text="Retrieve Session
+Value" Font-Bold="True" Font-Names="Times New Roman" Font-Size="X-Large"
+onclick="Button1_Click" Height="44px" Width="248px" />
+ </td>
+ </tr>
+ </table>
+ </div>
+ </form>
+</body>
+</html>
+Default.aspx.cs Page:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+public partial class _Default : System.Web.UI.Page
+{
+ protected void Page_Load(object sender, EventArgs e)
+ { }
+ protected void Button1_Click(object sender, EventArgs e)
+ {
+ Session["name"] = TextBox1.Text;
+ Session["city"] = TextBox2.Text;
+ Response.Redirect("http://localhost:53353/WebSite5/Default2.aspx");
+ }
+}
+Default2.aspx.cs Page:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+public partial class Default2 : System.Web.UI.Page
+{
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ if (Session["name"] == null) {
+Response.Redirect("http://localhost:53353/WebSite5/Default.aspx");
+ }
+ }
+ protected void Button1_Click(object sender, EventArgs e)
+ {
+ Label5.Text = Session["name"].ToString();
+ Label6.Text = Session["city"].ToString();
+ }
+}
+Session Timeout
+First Set session Timeout value in web.config file. Session timeout value by default set 20 minutes, we can change
+as per our requirement.
+<system.web>
+<sessionState timeout="2″>”"/sessionState>
+</system.web>
+
+
+e) Application State
+Application state is a global storage mechanism that used to stored data on the server and shared for all users, means
+data stored in Application state is common for all user. Data from Application state can be accessible anywhere in
+the application. Application state is based on the System.Web.HttpApplicationState class.
+The application state used same way as session state, but session state is specific for a single user session, whereas
+application state common for all users of asp.net application.
+Default.aspx Page:
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default2.aspx.cs"
+Inherits="Default2" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<title></title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div align="center">
+ <table style="border: medium solid #000000; height: 270px; width: 600px;"
+ border="0" frame="border">
+ <tr>
+ <td align="center" bgcolor="#009933" colspan="2">
+ <asp:Label ID="Label1" runat="server" Font-Bold="True"
+Font-Names="Century Schoolbook" Font-Size="XX-Large" ForeColor="White"
+Text="Application State Example"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td align="center" width="50%" colspan="2">
+ <asp:Label ID="Label2" runat="server" Font-Bold="True" FontSize="XX-Large" ForeColor="Red"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td align="center" >
+ <asp:Button ID="Button1" runat="server" Text="Click To Visit"
+Font-Bold="True" Font-Names="Times New Roman" Font-Size="X-Large"
+onclick="Button1_Click" Height="44px" Width="200px" />
+ </td>
+ </tr>
+ </table>
+ </div>
+ </form>
+</body>
+</html>
+Default.aspx.cs Page:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+public partial class Default2 : System.Web.UI.Page
+{
+ protected void Page_Load(object sender, EventArgs e)
+ { }
+ protected void Button1_Click(object sender, EventArgs e)
+ {
+ int count = 0;
+ if (Application["Visit"] != null)
+ {
+ count = Convert.ToInt32(Application["Visit"].ToString());
+ }
+ count = count + 1;
+ Application["Visit"] = count;
+ Label2.Text = "Total Visit = " + count.ToString();
+ }
+}
+
+
+Practical No.: - 7
+Aim: Working with Database
+a) Create a web application bind data in a multiline textbox by querying in another textbox.
+How to create database?
+Open Database Explorer  Right Click on Data Connection  Select option ‘Add Connection’  In new
+Window, Select option Microsoft SQL Server Database File and Click on OK button  In New Window, Put New
+Database Name (TYIT)  Click on OK Button.  Click on Yes Button.
+How to create table?
+After creating Database, expand your database (tyit.mdf). It will shows different folders. In that find Tables folder
+and right click on that folder  select Add New Table option  from Property tab change the table name from
+Table1 to sem5 and provide following column name.
+Then Save the all columns name. When you expand the Tables folder, it will shows your sem5 table. Also expand
+sem5 table, it will shows your all columns name which you created.
+Then right click on sem5 Table and select Show Table Data option. Enter following data:
+After that go to solution explorer and add New Page (Default.aspx)
+Code:
+Default.aspx Page:
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs"
+Inherits="_Default" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server"> <title></title> </head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:Label ID="Label1" runat="server" Text="Enter Query: " Font-Size="XXLarge"> </asp:Label>
+ &nbsp;&nbsp;&nbsp;&nbsp;
+ <asp:TextBox ID="TextBox1" runat="server" Font-Size="X-Large" Width="400px">
+</asp:TextBox>
+ <br />
+ <br />
+ <asp:Button ID="Button1" runat="server" Font-Size="X-Large"
+ onclick="Button1_Click" Text="Execute query" />
+ <br />
+ <br />
+ <asp:TextBox ID="TextBox2" runat="server" Font-Size="X-Large" Height="300px"
+ TextMode="MultiLine" Width="400px"></asp:TextBox>
+ </div>
+ </form>
+</body>
+</html>
+Add highlighted namespaces in your code behind page.
+Default.aspx.cs Page:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+public partial class _Default : System.Web.UI.Page
+{
+ protected void Page_Load(object sender, EventArgs e)
+ { }
+ protected void Button1_Click(object sender, EventArgs e)
+ {
+ string constr = @"Data Source=.\SQLEXPRESS;AttachDbFilename=C:\Users\ANKITA
+SHINDE\Documents\tyit.mdf;Integrated Security=True;Connect Timeout=30;User
+Instance=True";
+ SqlConnection con = new SqlConnection(constr);
+ con.Open();
+ SqlCommand cmd = new SqlCommand(TextBox1.Text, con);
+ SqlDataReader reader = cmd.ExecuteReader();
+ TextBox2.Text = "";
+ while (reader.Read())
+ {
+ TextBox2.Text += Environment.NewLine;
+ for (int i = 0; i < reader.FieldCount;i++)
+ {
+ TextBox2.Text += reader[i].ToString() + "\t";
+ }
+ }
+ reader.Close();
+ con.Close();
+ }
+}
+
+
+b) Create a web application to demonstrate data binding using DetailsView Control.
+Procedure:
+Use Previous Table for this practical.
+Code:
+Default.aspx Page:
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default2.aspx.cs"
+Inherits="Default2" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server"> <title></title> </head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:Label ID="Label1" runat="server" Text="Students Data" Font-Size="XXLarge"></asp:Label>
+ <br />
+ <br />
+ <asp:Label ID="Label2" runat="server" Font-Size="X-Large" Text="Student ID:
+"></asp:Label>
+ <asp:TextBox ID="TextBox1" runat="server" Font-Size="Large"></asp:TextBox>
+ <br />
+ <br />
+ <asp:Label ID="Label3" runat="server" Font-Size="X-Large" Text="Student
+Name: "></asp:Label>
+ <asp:TextBox ID="TextBox2" runat="server" Font-Size="Large"></asp:TextBox>
+ <br />
+ <br />
+ <asp:Label ID="Label4" runat="server" Font-Size="X-Large" Text="Student
+Class: "></asp:Label>
+ <asp:TextBox ID="TextBox3" runat="server" Font-Size="Large"></asp:TextBox>
+ <br />
+ <br />
+ <asp:Label ID="Label5" runat="server" Font-Size="X-Large" Text="Student
+Marks: "></asp:Label>
+ <asp:TextBox ID="TextBox4" runat="server" Font-Size="Large"></asp:TextBox>
+ <br />
+ <br />
+ <asp:Label ID="Label6" runat="server" Font-Size="X-Large" Text="Student
+Grade: "></asp:Label>
+ <asp:TextBox ID="TextBox5" runat="server" Font-Size="Large"></asp:TextBox>
+ <br />
+ <br />
+ <asp:Button ID="Button1" runat="server" Font-Size="X-Large" Text="Submit"
+ onclick="Button1_Click" />
+ <br />
+ <br />
+ <asp:DetailsView ID="DetailsView1" runat="server" AllowPaging="True"
+ Font-Size="X-Large" Height="50px" Width="200px"
+ onpageindexchanging="DetailsView1_PageIndexChanging">
+ </asp:DetailsView>
+ </div>
+ </form>
+</body>
+</html>
+Default.aspx.cs Page:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+public partial class Default2 : System.Web.UI.Page
+{
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ BindDetailsView();
+ }
+ protected void Button1_Click(object sender, EventArgs e)
+ {
+ string constr = @"Data
+Source=.\SQLEXPRESS;AttachDbFilename=C:\Users\ANKITA
+SHINDE\Documents\tyit.mdf;Integrated Security=True;Connect Timeout=30;User
+Instance=True";
+ SqlConnection con = new SqlConnection(constr);
+ con.Open();
+ string query_data = "insert into sem5 values('" + TextBox1.Text +
+"','" + TextBox2.Text + "','" + TextBox3.Text + "','" + TextBox4.Text + "','"
++ TextBox5.Text + "')";
+ SqlDataAdapter sda = new SqlDataAdapter(query_data, con);
+ DataTable dt = new DataTable();
+ sda.Fill(dt);
+ BindDetailsView();
+ con.Close();
+ }
+ private void BindDetailsView()
+ {
+ string constr = @"Data
+Source=.\SQLEXPRESS;AttachDbFilename=C:\Users\ANKITA
+SHINDE\Documents\tyit.mdf;Integrated Security=True;Connect Timeout=30;User
+Instance=True";
+ SqlConnection con = new SqlConnection(constr);
+ con.Open();
+ SqlDataAdapter sda = new SqlDataAdapter("select * from sem5", con);
+ DataTable dt = new DataTable();
+ sda.Fill(dt);
+ DetailsView1.DataSource = dt;
+ DetailsView1.DataBind();
+ con.Close();
+ }
+ protected void DetailsView1_PageIndexChanging(object sender,
+DetailsViewPageEventArgs e)
+ {
+ DetailsView1.PageIndex = e.NewPageIndex;
+ BindDetailsView();
+ }
+}
+
+
+Practical No.: - 8
+Aim: Programs are using CSS
+a) External CSS.
+Code:
+Default.aspx Page:
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default3.aspx.cs"
+Inherits="Default3" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+ <link rel="Stylesheet" type="text/css" href="StyleSheet.css" />
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div align="center">
+ <asp:Label ID="Label1" runat="server" Text="Practical No. 8" Font-Size="XXLarge"></asp:Label>
+ <hr />
+ <h1>This is External CSS Example.</h1>
+ <br />
+ <h2>B. N. Bandodkar College of of Science, Thane.</h2>
+ </div>
+ </form>
+</body>
+</html>
+Go to Solution Explorer  Right Click on Website Project  select Add New Item option  select Style
+Sheet Template  Add Following Code.
+StyleSheet.css Page:
+body
+{
+ background-color:Aqua;
+}
+h1
+{
+ background-color:Maroon;
+ font-family:Monotype Corsiva;
+ font-style:italic;
+ color:White;
+}
+h2
+{
+ font-family: Century Schoolbook;
+ color: red;
+ text-decoration: underline;
+}
+
+
+b) Internal CSS.
+Mention Style code in Head Tag.
+Code:
+Default.aspx Page:
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default3.aspx.cs"
+Inherits="Default3" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+ <style>
+ body
+ {
+ background-color:#CCFF99;
+ }
+ h1
+ {
+ background-color:Green;
+ font-family:Comic Sans MS;
+ font-style:oblique;
+ color:Yellow;
+ }
+ h2
+ {
+ background-color:Maroon;
+ font-family:Lucida Calligraphy;
+ color:White;
+ text-decoration:underline;
+ </style>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div align="center">
+ <asp:Label ID="Label1" runat="server" Text="Practical No. 8" Font-Size="XXLarge" Font-Bold="True"></asp:Label>
+ <hr />
+ <h1>This is Internal CSS Example.</h1>
+ <br />
+ <h2>B. N. Bandodkar College of of Science, Thane.</h2>
+ </div>
+ </form>
+</body>
+</html>
+
+c) Inline CSS
+In this type, for each tag use style property from property window.
+Code:
+Default.aspx Page:
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default3.aspx.cs"
+Inherits="Default3" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server"> <title></title> </head>
+<body bgcolor="#ffff99">
+ <form id="form1" runat="server">
+ <div align="center">
+ <asp:Label ID="Label1" runat="server" Text="Practical No. 8" Font-Size="XXLarge" Font-Bold="True"></asp:Label>
+ <hr />
+ <h1 style="font-family: 'Imprint MT Shadow'; text-decoration: underline;
+background-color: #0000FF; color: #FFFF00; font-style: italic;">This is Internal CSS
+Example.</h1>
+ <br />
+ <h2 style="background-color: ##CCFF99; font-family: 'Monotype Corsiva'; color:
+#800000; font-weight: bold; text-decoration: underline overline">B. N. Bandodkar
+College of of Science, Thane.</h2>
+ </div>
+ </form>
+</body>
+</html>
