@@ -1,0 +1,470 @@
+Practical No.: - 4
+Aim: Working with Forms Controls
+a) Create a Registration form to demonstrate use of various Validation controls.
+Code:
+Default.aspx Page:
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs"
+Inherits="_Default" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server"> <title></title> </head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:Label ID="Label1" runat="server" Text="Practical No. 4"
+Font-Bold="True" Font-Italic="True" Font-Names="Century Schoolbook"
+Font-Size="XX-Large" Font-Underline="True" ForeColor="Red"></asp:Label>
+ <br />
+ <br />
+ <asp:Label ID="Label2" runat="server" Text="a) Validation Control Example"
+ Font-Bold="True" Font-Names="Times New Roman" Font-Size="X-Large"
+ ForeColor="Blue"></asp:Label>
+ <br />
+ <br />
+<asp:Label ID="Label3" runat="server" Text="Name:- " Font-Size="Larger">
+</asp:Label>
+ <br />
+<asp:TextBox ID="TextBox1" runat="server" Font-Size="Large" Width="240px">
+</asp:TextBox>
+ <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+ ControlToValidate="TextBox1" ErrorMessage="Name Should Not Be Empty."
+ Font-Italic="True" ForeColor="Red"></asp:RequiredFieldValidator>
+ <br />
+ <br />
+ <asp:Label ID="Label4" runat="server" Text="Address:- " Font-Size="Larger">
+</asp:Label>
+ <br />
+ <asp:TextBox ID="TextBox2" runat="server" Font-Size="Large" Height="50px"
+ TextMode="MultiLine" Width="240px"></asp:TextBox>
+ <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
+ ControlToValidate="TextBox2" ErrorMessage="Address Should Not Be Empty."
+ Font-Italic="True" ForeColor="Red"></asp:RequiredFieldValidator>
+ <br />
+ <br />
+<asp:Label ID="Label5" runat="server" Text="Age:-" Font-Size="Larger">
+</asp:Label>
+ <br />
+ <asp:TextBox ID="TextBox3" runat="server" Font-Size="Large" Width="240px">
+</asp:TextBox>
+ <asp:RangeValidator ID="RangeValidator1" runat="server"
+ ControlToValidate="TextBox3" ErrorMessage="Age Should Be Greater Than 21"
+ Font-Italic="True" ForeColor="Red" MaximumValue="50" MinimumValue="20">
+</asp:RangeValidator>
+ <br />
+ <br />
+<asp:Label ID="Label6" runat="server" Text="Email ID:-" Font-Size="Larger">
+</asp:Label>
+ <br />
+ <asp:TextBox ID="TextBox4" runat="server" Font-Size="Large" Width="240px">
+</asp:TextBox>
+ <asp:RegularExpressionValidator ID="RegularExpressionValidator1"
+runat="server" ControlToValidate="TextBox4" ErrorMessage="Please Enter
+Valid Email ID." Font-Italic="True" ForeColor="Red"
+ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*">
+</asp:RegularExpressionValidator>
+ <br />
+ <br />
+ <asp:Label ID="Label7" runat="server" Text="Password:-" Font-Size="Larger">
+</asp:Label>
+ <br />
+ <asp:TextBox ID="TextBox5" runat="server" Font-Size="Large"
+TextMode="Password" Width="240px"></asp:TextBox>
+ <br />
+ <br />
+ <asp:Label ID="Label8" runat="server" Text="Confirm Password:-"
+ Font-Size="Larger"></asp:Label>
+ <br />
+ <asp:TextBox ID="TextBox6" runat="server" Font-Size="Large"
+TextMode="Password" Width="240px"></asp:TextBox>
+ <asp:CompareValidator ID="CompareValidator1" runat="server"
+ ControlToCompare="TextBox5" ControlToValidate="TextBox6"
+ErrorMessage="Password Does Not Match." Font-Italic="True"
+ForeColor="Red"></asp:CompareValidator>
+ <br />
+ <br />
+ <br />
+ <asp:Button ID="Button1" runat="server" Text="Register" Font-Bold="True"
+ Font-Names="Times New Roman" Font-Size="Large" />
+ </div>
+ </form>
+</body>
+</html>
+
+b) Create Web Form to demonstrate use of Adrotator Control.
+Code:
+AdvertisementFile.xml Page:
+<?xml version="1.0" encoding="utf-8" ?>
+<Advertisements>
+ <Ad>
+ <ImageUrl>computer-science-education.jpg</ImageUrl>
+ <NavigateUrl>https://www.google.co.in</NavigateUrl>
+ <AlternateText>Computer Science 1</AlternateText>
+ <Impressions>5</Impressions>
+ <Keyword>Hello 1</Keyword>
+ </Ad>
+ <Ad>
+ <ImageUrl>image (2).png</ImageUrl>
+ <NavigateUrl>https://www.google.co.in</NavigateUrl>
+ <AlternateText>Computer Science 2</AlternateText>
+ <Impressions>5</Impressions>
+ <Keyword>Hello 2</Keyword>
+ </Ad>
+ <Ad>
+ <ImageUrl>image.png</ImageUrl>
+ <NavigateUrl>https://www.google.co.in</NavigateUrl>
+ <AlternateText>Computer Science 3</AlternateText>
+ <Impressions>5</Impressions>
+ <Keyword>Hello 3</Keyword>
+ </Ad>
+</Advertisements>
+Default.aspx Page:
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs"
+Inherits="_Default" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server"> <title></title> </head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:AdRotator ID="AdRotator1" runat="server"
+AdvertisementFile="~/AdvertisementFile.xml" Height="300px" Width="500px" />
+ </div>
+ </form>
+</body>
+</html>
+
+
+c) Create Web Form to demonstrate use User Controls.
+Code:
+Footer.ascx Page:
+<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Footer.ascx.cs"
+Inherits="Footer" %>
+<table style="width: 100%;">
+ <tr>
+ <td align="center" style="font-family: Cambria; color: #FF0000;
+font-weight: bold; text-decoration: blink; font-size: large; backgroundcolor: #00CCFF;">
+ <asp:Label ID="Label1" runat="server" Text="Advance Web Programming
+Practical Session"></asp:Label>
+ </td>
+ </tr>
+</table>
+Default.aspx Page:
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs"
+Inherits="_Default" %>
+<%@ Register Src="~/Footer.ascx" TagName="footer" TagPrefix="AWPfooter" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server"> <title></title> </head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:Label ID="Label1" runat="server" Text="Welcome to TYIT Classroom."
+Font-Bold="True" Font-Italic="True" Font-Size="XX-Large"></asp:Label>
+ <br /> <br /> <br />
+ </div>
+ <AWPfooter:footer ID="footer1" runat="server" />
+ </form>
+</body>
+</html>
+Output:
+
+
+Practical No.: - 5
+Aim: Working with Navigation, Beautification and Master page.
+a) Create Web Form to demonstrate use of Website Navigation controls and Site Map.
+Code:
+Create Sitemap page.
+Right Click on your Website Project  Add New Item  Site Map and name it Web.sitemap
+Web.sitemap:
+<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+ <siteMapNode url="Home.aspx" title="Science Courses" description="Science
+Courses">
+ <siteMapNode url="IT.aspx" title="IT" description="IT">
+ <siteMapNode url="SPM.aspx" title="SPM" description="SPM" />
+ <siteMapNode url="AWP.aspx" title="AWP" description="AWP" />
+ <siteMapNode url="IOT.aspx" title="IOT" description="IOT" />
+ </siteMapNode>
+ <siteMapNode url="CS.aspx" title="CS" description="CS">
+ <siteMapNode url="INS.aspx" title="INS" description="INS" />
+ <siteMapNode url="GP.aspx" title="GP" description="GP" />
+ <siteMapNode url="Linux.aspx" title="Linux" description="Linux" />
+ </siteMapNode>
+ </siteMapNode>
+</siteMap>
+Create one Web Page and Drag and Drop Menu Control and SiteMapDataSource Control.
+Home.aspx Page:
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Home.aspx.cs"
+Inherits="_Default" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server"> <title></title> </head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:Label ID="Label1" runat="server" Text="Practical No.5" Font-Bold="True"
+ Font-Italic="True" Font-Names="Century Schoolbook" Font-Size="XX-Large"
+ ForeColor="Red" Font-Underline="True"></asp:Label>
+ <br />
+ <br />
+ <asp:Label ID="Label2" runat="server" Text="Website Navigation controls and
+Site Map" Font-Bold="True" Font-Names="Times New Roman" Font-Size="XLarge" ForeColor="Blue"></asp:Label>
+ <br />
+ <br />
+ <asp:Menu ID="Menu1" runat="server" DataSourceID="SiteMapDataSource1"
+ Font-Size="X-Large">
+ </asp:Menu>
+ <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" />
+ </div>
+ </form>
+</body>
+</html>
+Create a web Page and Name it IT.aspx. After that Drag and Drop SiteMapPath Control.
+IT.aspx Page:
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="IT.aspx.cs" Inherits="IT" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server"> <title></title> </head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:SiteMapPath ID="SiteMapPath1" runat="server" Font-Size="X-Large">
+ </asp:SiteMapPath>
+ </div>
+ </form>
+</body>
+</html>
+Same steps perform for pages which are mentioned in Web.sitemap Page.
+CS.aspx Page:
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="CS.aspx.cs" Inherits="CS" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server"> <title></title> </head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:SiteMapPath ID="SiteMapPath1" runat="server" Font-Size="X-Large">
+ </asp:SiteMapPath>
+ </div>
+ </form>
+</body>
+</html>
+SPM.aspx Page:
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SPM.aspx.cs" Inherits="SPM"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server"> <title></title> </head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:SiteMapPath ID="SiteMapPath1" runat="server" Font-Size="X-Large">
+ </asp:SiteMapPath>
+ </div>
+ </form>
+</body>
+</html>
+AWP.aspx Page:
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AWP.aspx.cs" Inherits="AWP"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server"> <title></title> </head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:SiteMapPath ID="SiteMapPath1" runat="server" Font-Size="X-Large">
+ </asp:SiteMapPath>
+ </div>
+ </form>
+</body>
+</html>
+IOT.aspx Page:
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="IOT.aspx.cs" Inherits="IOT"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server"> <title></title> </head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:SiteMapPath ID="SiteMapPath1" runat="server" Font-Size="X-Large">
+ </asp:SiteMapPath>
+ </div>
+ </form>
+</body>
+</html>
+INS.aspx Page:
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="INS.aspx.cs" Inherits="INS"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server"> <title></title> </head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:SiteMapPath ID="SiteMapPath1" runat="server" Font-Size="X-Large">
+ </asp:SiteMapPath>
+ </div>
+ </form>
+</body>
+</html>
+GP.aspx Page:
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="GP.aspx.cs" Inherits="GP" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server"> <title></title> </head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:SiteMapPath ID="SiteMapPath1" runat="server" Font-Size="X-Large">
+ </asp:SiteMapPath>
+ </div>
+ </form>
+</body>
+</html>
+Linux.aspx Page:
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Linux.aspx.cs"
+Inherits="Linux" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server"> <title></title> </head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:SiteMapPath ID="SiteMapPath1" runat="server" Font-Size="X-Large">
+ </asp:SiteMapPath>
+ </div>
+ </form>
+</body>
+</html>
+
+
+b) Create a web application to demonstrate use of Master Page with applying Styles and
+Themes for page beautification.
+Code:
+MasterPage.master:
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs"
+Inherits="MasterPage" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server"> <title></title>
+ <asp:ContentPlaceHolder id="head" runat="server">
+ </asp:ContentPlaceHolder>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <table style="width: 100%; vertical-align: middle;" align="center">
+ <tr valign="middle" align="center" style="background-color: #00FFFF;">
+ <td colspan="4" height="130px">
+ <br />
+ <asp:Label ID="Label1" runat="server" Text="Information Technology
+Blog" Font-Bold="True" Font-Names="Lucida Calligraphy" FontSize="40pt" ForeColor="#CC0066"></asp:Label>
+</td>
+ </tr>
+ <tr align="center" bgcolor="Black" valign="middle">
+ <td width="150px" align="center" height="40px" valign="middle">
+ &nbsp;
+ <asp:LinkButton ID="LinkButton1" runat="server" Font-Italic="True"
+ Font-Names="Comic Sans MS" Font-Size="20pt" Font-Strikeout="False"
+ForeColor="White" PostBackUrl="~/Default.aspx"> Home
+</asp:LinkButton>
+ </td>
+ <td width="150px" height="40px">
+ &nbsp;
+<asp:LinkButton ID="LinkButton2" runat="server" Font-Bold="False"
+Font-Italic="True" Font-Names="Comic Sans MS" Font-Size="20pt"
+Font-Underline="False" ForeColor="White"
+PostBackUrl="~/Default1.aspx">Syllabus</asp:LinkButton>
+ </td>
+ <td width="150px" height="40px">
+ &nbsp;
+<asp:LinkButton ID="LinkButton3" runat="server" Font-Italic="True"
+Font-Names="Comic Sans MS" Font-Size="20pt" Font-Underline="False"
+ForeColor="White" PostBackUrl="~/Default2.aspx"> Theory
+</asp:LinkButton>
+ </td>
+ <td width="150px" height="40px">
+ &nbsp;
+<asp:LinkButton ID="LinkButton4" runat="server" Font-Italic="True"
+Font-Names="Comic Sans MS" Font-Size="20pt" Font-Underline="False"
+ForeColor="White" PostBackUrl="~/Default3.aspx"> Practical
+</asp:LinkButton>
+ </td>
+ </tr>
+ </table>
+ <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+ </asp:ContentPlaceHolder>
+ </div>
+ </form>
+</body>
+</html>
+Default.aspx Page:
+<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master"
+AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
+Runat="Server">
+<div align="center" style="background-color: #FFCC99">
+<asp:Label ID="Label1" runat="server" Text="This is Home Page." FontBold="True" Font-Italic="True" Font-Names="Century Schoolbook" FontSize="30pt" ForeColor="Red"></asp:Label>
+ <br /> <br />
+ <asp:Image ID="Image1" runat="server" ImageUrl="~/image (2).png"
+Height="300px" Width="500px" />
+ <br /> <br /> <br /> <br />
+ </div>
+</asp:Content>
+Default1.aspx Page:
+<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master"
+AutoEventWireup="true" CodeFile="Default1.aspx.cs" Inherits="Default1" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
+Runat="Server">
+<div align="center" style="background-color: #FFCC99">
+ <asp:Label ID="Label1" runat="server" Text="This is Syllabus Page." FontBold="True" Font-Italic="True" Font-Names="Century Schoolbook" FontSize="30pt" ForeColor="Red"></asp:Label>
+ <br /> <br />
+ <asp:Image ID="Image1" runat="server" ImageUrl="~/computer-scienceeducation.jpg" Height="300px" Width="500px" />
+ <br /> <br /> <br /> <br />
+ </div>
+</asp:Content>
+Default2.aspx Page:
+<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master"
+AutoEventWireup="true" CodeFile="Default2.aspx.cs" Inherits="Default2" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
+Runat="Server">
+<div align="center" style="background-color: #FFCC99">
+ <asp:Label ID="Label1" runat="server" Text="This is Theory Page." FontBold="True" Font-Italic="True" Font-Names="Century Schoolbook" FontSize="30pt" ForeColor="Red"></asp:Label>
+ <br /> <br />
+ <asp:Image ID="Image1" runat="server" Height="300px" Width="500px"
+ ImageUrl="~/wp5315487-study-computer-wallpapers.jpg" />
+ <br /> <br /> <br /> <br />
+ </div>
+</asp:Content>
+Default3.aspx Page:
+<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master"
+AutoEventWireup="true" CodeFile="Default3.aspx.cs" Inherits="Default3" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
+Runat="Server">
+<div align="center" style="background-color: #FFCC99">
+ <asp:Label ID="Label1" runat="server" Text="This is Practical Page." FontBold="True" Font-Italic="True" Font-Names="Century Schoolbook" FontSize="30pt" ForeColor="Red"></asp:Label>
+ <br /> <br />
+ <asp:Image ID="Image1" runat="server" ImageUrl="~/5673719.jpg"
+Height="300px" Width="500px" />
+ <br /> <br /> <br /> <br />
+ </div>
+</asp:Content>
