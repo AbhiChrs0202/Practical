@@ -1,0 +1,638 @@
+Practical No.:- 1
+Aim: Working with basic C# and ASP .NET
+a) Create an application that obtains four int values fromthe user anddisplaystheproduct. Program:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+namespace ConsoleApplication1
+{
+class Program
+{
+static void Main(string[] args)
+{
+int num1, num2, num3, num4, prod;
+Console.Write("Enter number 1: ");
+num1 = Convert.ToInt32(Console.ReadLine());
+Console.Write("Enter number 2: ");
+num2 = Convert.ToInt32(Console.ReadLine());
+Console.Write("Enter number 3: ");
+num3 = Convert.ToInt32(Console.ReadLine());
+Console.Write("Enter number 4: ");
+num4 = Convert.ToInt32(Console.ReadLine());
+prod = num1 * num2 * num3 * num4;
+Console.WriteLine(num1 + " * " + num2 + " * " + num3 + " * " + num4 + " = " + prod);
+Console.ReadKey();
+}
+}
+}
+Output:
+
+b) Create an application to demonstrate string operations. Program:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+namespace ConsoleApplication2
+{
+class Program
+{
+static void Main(string[] args)
+{
+string mystring;
+int a = 100;
+string s = " This is test string ";
+string s1 = " ASP.NET with C#";
+//Type Conversion from int to string
+Console.WriteLine("Convert Number to String");
+mystring = a.ToString();
+Console.WriteLine("String is " + mystring);
+Console.WriteLine("\n-----------------------------------------");
+//Trim() Method
+Console.WriteLine("\nBefore Trim() Method: " + s);
+s = s.Trim();
+Console.WriteLine("After Trim() Method: " + s);
+Console.WriteLine("\n-----------------------------------------");
+// join two strings (Concatination)
+string joinedString = string.Concat(s, s1);
+Console.WriteLine("\nJoined string: " + joinedString);
+Console.WriteLine("\n-----------------------------------------");
+// substring
+s = s.Substring(0, 4);
+Console.WriteLine("\nSubstring() Method: " + s);
+Console.WriteLine("\n-----------------------------------------");
+s = s.ToUpper();
+Console.WriteLine("\nUppercase String: " + s);
+Console.WriteLine("\n-----------------------------------------");
+s = s.Replace("IS", "AT");
+Console.WriteLine("\nReplace String: " + s);
+Console.WriteLine("\n-----------------------------------------");
+int length = s.Length;
+Console.WriteLine("\nLength of String is: " + length);
+Console.WriteLine("\n-----------------------------------------");
+Console.ReadKey();
+}
+}
+}
+Output:
+
+c) Create an application that receives the (Student Id, Student Name, CourseName,Dateof Birth) information from a set of students. The application shouldalsodisplaytheinformation of all the students once the data entered. Program:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+namespace ConsoleApplication3
+{
+class Program
+{
+struct Student
+{
+public string studid, name, cname;
+public int day, month, year;
+}
+static void Main(string[] args)
+{
+int count;
+Console.Write("Enter Students count: ");
+count = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("---------------------------------------\n");
+Student[] s = new Student[5];
+int i;
+for (i = 0; i < count; i++)
+{
+Console.Write("Enter Student Id:");
+s[i].studid = Console.ReadLine();
+Console.Write("Enter Student name : ");
+s[i].name = Console.ReadLine();
+Console.Write("Enter Course name : ");
+s[i].cname = Console.ReadLine();
+Console.Write("Enter Day(1-31): ");
+s[i].day = Convert.ToInt32(Console.ReadLine());
+Console.Write("Enter Month(1-12): ");
+s[i].month = Convert.ToInt32(Console.ReadLine());
+Console.Write("Enter Year: ");
+s[i].year = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("---------------------------------------\n");
+}
+Console.WriteLine("\nStudent's List\n");
+Console.WriteLine("Student ID\tStudent Name\tCourse Name\tBirth Date\n");
+Console.WriteLine("-------------------------------------------------------------------");
+for (i = 0; i < count; i++)
+{
+Console.WriteLine(s[i].studid + "\t\t" + s[i].name + "\t\t" + s[i].cname + "\t\t" + s[i].day+"-"+s[i].month + "-" + s[i].year);
+}
+Console.ReadKey();
+}
+}
+}
+Output:
+
+
+d) Create an application to demonstrate following operations
+i) Generate Fibonacci series. Program:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+namespace ConsoleApplication4
+{
+class Program
+{
+static void Main(string[] args)
+{
+Console.Write("Enter the number of elements: ");
+int range = Convert.ToInt32(Console.ReadLine());
+int a = 0;
+int b = 1;
+int c = a + b;
+Console.WriteLine("Fibonacci Series: ");
+Console.WriteLine(a);
+Console.WriteLine(b);
+while(c <= range)
+{
+Console.WriteLine(c);
+a = b;
+b = c;
+c = a + b;
+}
+Console.ReadKey();
+}
+}
+}
+Output:
+
+
+ii) Test for prime numbers. Program:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+namespace ConsoleApplication5
+{
+class Program
+{
+static void Main(string[] args)
+{
+int num, counter;
+Console.Write("Enter number:");
+num = int.Parse(Console.ReadLine());
+for (counter = 2; counter <= num / 2; counter++)
+{
+if ((num % counter) == 0)
+break;
+}
+if (num == 1)
+Console.WriteLine(num + " is neither prime nor composite");
+else if (counter < (num / 2))
+Console.WriteLine(num + " is not prime number");
+else
+Console.WriteLine(num + " is prime number");
+Console.ReadKey();
+}
+}
+}
+Output:
+iii) Test for vowels. Program:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+namespace ConsoleApplication6
+{
+class Program
+{
+static void Main(string[] args)
+{
+char ch;
+Console.Write("\n");
+Console.Write("check whether the input alphabet is a vowel or not:\n");
+Console.Write("-----------------------------------------------------");
+Console.Write("\n\n");
+Console.Write("Input an Alphabet (A-Z or a-z) : ");
+ch = Convert.ToChar(Console.ReadLine().ToLower());
+switch (ch)
+{
+case 'a':
+Console.WriteLine("\n" + ch + " is vowel");
+break;
+case 'i':
+Console.WriteLine("\n" + ch + " is vowel");
+break;
+case 'o':
+Console.WriteLine("\n" + ch + " is vowel");
+break;
+case 'u':
+Console.WriteLine("\n" + ch + " is vowel");
+break;
+case 'e':
+Console.WriteLine("\n" + ch + " is vowel");
+break;
+default:
+Console.WriteLine("\n" + ch + " is not a vowel");
+break;
+}
+Console.ReadKey();
+}
+}
+}
+Output:
+iv) Use of foreach loop with arrays
+Program:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+namespace ConsoleApplication7
+{
+class Program
+{
+static void Main(string[] args)
+{
+char[] gender = { 'm', 'f', 'm', 'm', 'm', 'f', 'f', 'm', 'm', 'f' };
+int male = 0, female = 0;
+foreach (char g in gender)
+{
+if (g == 'm')
+male++;
+else if (g == 'f')
+female++;
+}
+Console.WriteLine("Number of male = " + male);
+Console.WriteLine("Number of female = " + female);
+Console.ReadKey();
+}
+}
+}
+Output:
+v) Reverse a number and find sum of digits of a number. Program:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+namespace ConsoleApplication8
+{
+class Program
+{
+static void Main(string[] args)
+{
+int num, actualnumber, revnum = 0, digit, sumDigits = 0;
+Console.Write("Enter number:");
+num = Convert.ToInt32(Console.ReadLine());
+actualnumber = num;
+while (num > 0)
+{
+digit = num % 10;
+revnum = revnum * 10 + digit;
+sumDigits = sumDigits + digit;
+num = num / 10;
+}
+Console.WriteLine("Reverse of " + actualnumber + " = " + revnum);
+Console.WriteLine("Sum of its digits: " + sumDigits);
+Console.ReadKey();
+}
+}
+}
+Output:
+Practical No.:- 2
+Aim: Working with Object Oriented C# and ASP .NET
+a) Create simple application to perform following operations
+i) Finding factorial Value
+Program:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+namespace ConsoleApplication9
+{
+class Program
+{
+static void Main(string[] args)
+{
+int i, fact = 1, number;
+Console.Write("Enter any Number: ");
+number = Convert.ToInt32(Console.ReadLine());
+for (i = 1; i <= number; i++)
+{
+fact = fact * i;
+}
+Console.WriteLine("\n");
+Console.Write("Factorial of " + number + " is: " + fact);
+Console.ReadKey();
+}
+}
+}
+Output:
+ii) Money Conversion
+Program:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+namespace ConsoleApplication10
+{
+class Program
+{
+static void Main(string[] args)
+{
+int choice;
+Console.WriteLine("Enter your choice:\nPress 1 - Dollar to Rupee\nPress 2 - Euro toRupee");choice = Convert.ToInt32(Console.ReadLine());
+switch (choice)
+{
+case 1:
+Double dollar , rupee = 79.27, val;
+Console.WriteLine("\nEnter the Dollar Value :");
+dollar = Convert.ToDouble(Console.ReadLine());
+val = dollar * rupee;
+Console.WriteLine(dollar + " Dollar Equals " + val + " Rupees");
+break;
+case 2:
+Double euro , rupees = 80.82, value;
+Console.WriteLine("\nEnter the Euro Value :");
+euro = Convert.ToDouble(Console.ReadLine());
+value = euro * rupees;
+Console.WriteLine(euro + " Euro Equals " + value + " Rupees");
+break;
+default:
+Console.WriteLine("You pressed wrong choice...!!!");
+break;
+}
+Console.ReadKey();
+}
+}
+}
+Output:
+iii) Quadratic Equation
+Program:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+namespace ConsoleApplication11
+{
+class Program
+{
+static void Main(string[] args)
+{
+double a, b, c;
+double disc, deno, x1, x2;
+Console.WriteLine("ENTER THE VALUES OF A,B,C...");
+a = Convert.ToDouble(Console.ReadLine());
+b = Convert.ToDouble(Console.ReadLine());
+c = Convert.ToDouble(Console.ReadLine());
+if (a == 0)
+{
+x1 = -c / b;
+Console.WriteLine("The roots are Linear: "+ x1);
+}
+else
+{
+disc = (b * b) - (4 * a * c);
+deno = 2 * a;
+if (disc > 0)
+{
+Console.WriteLine("THE ROOTS ARE REAL AND DISTINCT ROOTS");
+x1 = (-b / deno) + (Math.Sqrt(disc) / deno);
+x2 = (-b / deno) - (Math.Sqrt(disc) / deno);
+Console.WriteLine("THE ROOTS ARE... " + x1 + " and " + x2);
+}
+else if (disc == 0)
+{
+Console.WriteLine("THE ROOTS ARE REPEATED ROOTS");
+x1 = -b / deno;
+Console.WriteLine("THE ROOT IS...: " + x1);
+}
+else
+{
+Console.WriteLine("THE ROOTS ARE IMAGINARY ROOTS\n");
+x1 = -b / deno;
+x2 = ((Math.Sqrt((4 * a * c) - (b * b))) / deno);
+Console.WriteLine("THE ROOT 1: " + x1 + " + " + x2 + " i");
+Console.WriteLine("THE ROOT 2: " + x1 + " - " + x2 + " i");
+}
+}
+Console.ReadLine();
+}
+}
+}
+Output:
+iv) Temperature Conversion
+Program:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+namespace ConsoleApplication12
+{
+class Program
+{
+static void Main(string[] args)
+{
+double celsius, fahrenheit;
+Console.WriteLine("Enter Temperature in celsius: ");
+celsius = Convert.ToDouble(Console.ReadLine());
+fahrenheit = (celsius * 9) / 5 + 32;
+Console.WriteLine("\nThe converted fahrenheit temperature is: " + fahrenheit);
+Console.ReadKey();
+}
+}
+}
+Output:
+b) Create simple application to demonstrate use of following concepts
+i) Function Overloading
+Program:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+namespace ConsoleApplication13
+{
+class Program
+{
+public void CalculateArea(double r)
+{
+double pi = 3.14;
+double area = pi * r * r;
+Console.WriteLine("Area of Circle is: " + area);
+}
+public void CalculateArea(double l, double b)
+{
+double area = l * b;
+Console.WriteLine("Area of Rectangle: " + area);
+}
+static void Main(string[] args)
+{
+Program p = new Program();
+double r, l, b;
+Console.WriteLine("Enter the value of radius: ");
+r = Convert.ToDouble(Console.ReadLine());
+p.CalculateArea(r);
+Console.WriteLine("\n------------------------------------\n");
+Console.WriteLine("Enter the value of length: ");
+l = Convert.ToDouble(Console.ReadLine());
+Console.WriteLine("Enter the value of breadth: ");
+b = Convert.ToDouble(Console.ReadLine());
+p.CalculateArea(l, b);
+Console.ReadKey();
+}
+}
+}
+Output:
+ii) Inheritance
+Program:
+using System;
+namespace sycs
+{
+class sycs
+{
+static void Main(string[] args)
+{
+Scooter sc = new Scooter();
+sc.ScooterType();
+Car c = new Car();
+c.CarType();
+Console.ReadKey();
+}
+}
+//Creating Base Class
+class Tyre
+{
+protected void TyreType()
+{
+Console.WriteLine("This is Tubeless Tyre");
+}
+}
+//Creating Child Class
+class Scooter : Tyre
+{
+public void ScooterType()
+{
+Console.WriteLine("\nScooter Color is Red");
+TyreType();
+}
+}
+//Creating Child Class
+class Car : Tyre
+{
+public void CarType()
+{
+Console.WriteLine("\n\nCar Type : Ferrari");
+TyreType();
+}
+}
+}
+Output:
+iii) Constructor overloading
+Program:
+using System;
+namespace sycs
+{
+class gamescore
+{
+string user;
+int age;
+//Default Constructor
+public gamescore()
+{
+user = "John";
+age = 25;
+Console.WriteLine("\nPrevious User {0} and he was {1} year old", user, age);
+}
+//Parameterized Constructor
+public gamescore(string name, int age1)
+{
+user = name;
+age = age1;
+Console.WriteLine("\nCurrent User {0} and he is {1} year old", user, age);
+}
+}
+class sycs
+{
+static void Main(string[] args)
+{
+//Default Constructor Called
+gamescore gs = new gamescore();
+//Overloaded Constructor. gamescore gs1 = new gamescore("Ram", 30);
+Console.ReadLine();
+}
+}
+}
+Output:
+iv) Interfaces
+Program:
+using System;
+namespace CsharpInterface {
+interface IPolygon {
+// method without body
+void calculateArea(int l, int b);
+}
+class Rectangle : IPolygon {
+// implementation of methods inside interface
+public void calculateArea(int l, int b) {
+int area = l * b;
+Console.WriteLine("Area of Rectangle: " + area);
+}
+}
+class Program {
+static void Main (string [] args) {
+Rectangle r1 = new Rectangle();
+r1.calculateArea(100, 200);
+}
+}
+}
+Output:
+c) Create simple application to demonstrate use of following concepts
+i) Using Delegates and events
+Program:
+using System;
+using System.Collections.Generic;
+class Program
+{
+// define a method that returns sum of two int numbers
+static int calculateSum(int x, int y)
+{
+return x + y;
+}
+// define a delegate
+public delegate int myDelegate(int num1, int num2);
+static void Main()
+{
+// create an instance of delegate by passing method name
+myDelegate d = new myDelegate(calculateSum);
+// calling calculateSum() using delegate
+int result = d(5, 6);
+Console.WriteLine(result);
+}
+}
+Output:
+ii) Exception handling
+Program:
+using System;
+public class Program
+{
+static void Main()
+{
+// take first int input from user
+Console.WriteLine("Enter first number:");
+int firstNumber = Convert.ToInt32(Console.ReadLine());
+// take second int input from user
+Console.WriteLine("Enter second number:");
+int secondNumber = Convert.ToInt32 (Console.ReadLine());
+try
+{
+// code that may raise raise an exception
+int result = firstNumber / secondNumber;
+Console.WriteLine("Division of two numbers is: " + result);
+}
+// this catch block gets executed only when an exception is raised
+catch (Exception e)
+{
+Console.WriteLine("An exception occurred: " + e.Message);
+}
+finally
+{
+// this code is always executed whether of exception occurred or not
+Console.WriteLine("Sum of two numbers is: " + (firstNumber + secondNumber));
+}
+}
+}
+Output:
